@@ -1,43 +1,56 @@
-import { app, BrowserWindow } from 'electron';
-import * as path from 'path';
-import * as isDev from 'electron-is-dev';
+import { app, BrowserWindow } from "electron"
+import * as path from "path"
+import * as isDev from "electron-is-dev"
 
-let win: BrowserWindow | null = null;
+let win: BrowserWindow | null = null
 
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({
+    width: 1600,
+    height: 900,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  })
 
   if (isDev) {
-    win.loadURL('http://localhost:3000/index.html');
-    win.webContents.openDevTools();
+    win.loadURL("http://localhost:3000/index.html")
+    win.webContents.openDevTools()
   } else {
     // 'build/index.html'
-    win.loadURL(`file://${__dirname}/../index.html`);
+    win.loadURL(`file://${__dirname}/../index.html`)
   }
 
-  win.on('closed', () => win = null);
+  win.on("closed", () => (win = null))
 
   // Hot Reloading
   if (isDev) {
     // 'node_modules/.bin/electronPath'
-    require('electron-reload')(__dirname, {
-      electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron'),
+    require("electron-reload")(__dirname, {
+      electron: path.join(
+        __dirname,
+        "..",
+        "..",
+        "node_modules",
+        ".bin",
+        "electron"
+      ),
       forceHardReset: true,
-      hardResetMethod: 'exit'
-    });
+      hardResetMethod: "exit",
+    })
   }
 }
 
-app.on('ready', createWindow);
+app.on("ready", createWindow)
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit()
   }
-});
+})
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (win === null) {
-    createWindow();
+    createWindow()
   }
-});
+})
