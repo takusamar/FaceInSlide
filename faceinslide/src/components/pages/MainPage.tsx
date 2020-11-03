@@ -12,7 +12,7 @@ export const MainPage: React.FC = () => {
         <SlideArea />
       </Box>
       <Box width={400}>
-        <Box border={1} height={300}>
+        <Box border={1} height={900}>
           <FaceArea />
         </Box>
         <Box border={1} height={600}>

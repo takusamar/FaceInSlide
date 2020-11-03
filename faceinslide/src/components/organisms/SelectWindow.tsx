@@ -69,7 +69,6 @@ export const SelectWindow: React.FC<OwnProps> = (props) => {
 
   return (
     <Box>
-      <video id={props.id} autoPlay />
       <Box pt={2}>
         <Box display="flex" justifyContent="center" alignItems="center">
           {!isSourceSelected && (
@@ -83,6 +82,7 @@ export const SelectWindow: React.FC<OwnProps> = (props) => {
             </Button>
           )}
         </Box>
+        <video id={props.id} autoPlay />
       </Box>
       <SelectWindowDialog
         sources={sources}
