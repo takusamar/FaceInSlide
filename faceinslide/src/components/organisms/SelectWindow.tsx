@@ -34,7 +34,7 @@ export const SelectWindow: React.FC<OwnProps> = (props) => {
       })
   }
 
-  const handleOnSelectThumbnail = async (id: string) => {
+  const handleOnSelect = async (id: string) => {
     const videoConstraints = {
       audio: false,
       video: {
@@ -49,7 +49,7 @@ export const SelectWindow: React.FC<OwnProps> = (props) => {
       },
     } as MediaStreamConstraints
     const stream = await navigator.mediaDevices.getUserMedia(videoConstraints)
-    const video = document.querySelector("video")
+    const video = document.getElementById(props.id) as HTMLVideoElement
     if (video) {
       video.srcObject = stream
       video.onloadedmetadata = (e) => video.play()
@@ -58,7 +58,7 @@ export const SelectWindow: React.FC<OwnProps> = (props) => {
     props.onSelected(true)
   }
   const handleOnCloseVideo = () => {
-    const video = document.querySelector("video")
+    const video = document.getElementById(props.id) as HTMLVideoElement
     if (video) {
       video.srcObject = null
       video.onloadedmetadata = null
@@ -88,7 +88,7 @@ export const SelectWindow: React.FC<OwnProps> = (props) => {
         sources={sources}
         open={isOpenDialog}
         onSelect={(id) => {
-          handleOnSelectThumbnail(id)
+          handleOnSelect(id)
           setIsOpenDialog(false)
         }}
         onClose={() => setIsOpenDialog(false)}

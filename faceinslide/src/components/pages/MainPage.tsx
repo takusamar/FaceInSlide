@@ -2,6 +2,7 @@ import React from "react"
 import { Box } from "@material-ui/core"
 import { theme } from "../../theme"
 import { SlideArea } from "../organisms/SlideArea"
+import { FaceArea } from "../organisms/FaceArea"
 
 export const MainPage: React.FC = () => {
   console.log("MainPage")
@@ -12,7 +13,7 @@ export const MainPage: React.FC = () => {
       </Box>
       <Box width={400}>
         <Box border={1} height={300}>
-          Face
+          <FaceArea />
         </Box>
         <Box border={1} height={600}>
           Memo
